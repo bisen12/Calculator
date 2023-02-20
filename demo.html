@@ -1,0 +1,242 @@
+<!-- Create a simple Program to build the Calculator in JavaScript using with HTML and CSS web languages. -->
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  
+<title> JavaScript Calculator </title>
+
+<style>
+#clear{
+  width: 230px;
+  border: 3px solid gray;
+      border-radius: 3px;
+      padding: 15px;
+      background-color: rgb(197, 140, 190);
+  }
+  #clear:active{
+    font-size:medium;
+    background-color: rgb(141, 80, 146);
+  }
+  
+  .er:active{
+    font-size:medium;
+    background-color: rgb(219, 110, 59);
+    text-align: center;
+  }
+  .er{
+  display: inline-block;
+  width: 42px;
+  height: 60px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: aqua;
+  align-items: center;
+
+
+  
+  
+
+
+  }
+  
+  .formstyle
+  {
+  width: 240px;
+  height: 500px;
+  margin: auto;
+  border: 3px solid rgb(77, 183, 224);
+  border-radius: 20px;
+  padding: 50px;
+  background-image: url("im2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  }
+  
+  .form1{
+    padding: 20px;
+    margin: 50%;
+  }
+  .input
+  {
+    width: 200px;
+    height:300px;
+    color: white;
+     margin: 20px;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  #back:active{
+    font-size:medium;
+    background-color: rgb(219, 110, 59);
+    text-align: center;
+  }
+  #myBtn:active{
+    font-size:medium;
+    background-color: rgb(219, 110, 59);
+    text-align: center;
+  }
+  #calc{
+  width: 190px;
+  border: 5px solid black;
+      border-radius: 3px;
+      padding: 20px;
+      margin: auto;
+  }
+  #calc:active{
+    font-size:medium;
+    background-color: rgb(219, 110, 59);
+  }
+  body{
+    background-image: url("im.jpg");
+    background-repeat: no-repeat;
+  background-size: cover;
+  }
+  
+  #message{
+    color: red;
+    
+  }
+  </style>
+</head>
+<body>
+
+<div class= "formstyle">
+<form name = "form1">
+	
+	<!-- This input box shows the button pressed by the user in calculator. -->
+  <input id = "calc" type ="text" name = "answer" oninput="checkCondition()" placeholder="Perform The Operation"
+  title="Enter only numbers">  <p id="message"></p>
+  <div class="input">
+  <!-- Display the calculator button on the screen. -->
+  <!-- onclick() function display the number prsses by the user. -->
+  <button onclick="displayValue(this)" class="er" >1</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >2</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >3</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >+</button>&nbsp;<br>
+  <br> 
+  
+  <button onclick="displayValue(this)" class="er" >4</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >5</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >6</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >-</button>&nbsp;<br>
+  <br> 
+  
+  <button onclick="displayValue(this)" class="er" >7</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >8</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >9</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >*</button>&nbsp;<br>
+  <br> 
+  <button onclick="displayValue(this)" class="er" >/</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >0</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >.</button>&nbsp;
+  <button onclick="evaluateExpression()" id="myBtn"onchange="checkValue(event)"class="er">=</button>&nbsp;<br>
+  <!--<button onclick="document.getElementById('calc').value = eval(document.getElementById('calc').value)">=</button>-->
+  
+
+	<!-- When we click on the '=' button, the onclick() shows the sum results on the calculator screen. 
+  <input type = "button" id="myBtn" value = "=" onclick = "form1.answer.value = eval(form1.answer.value) "onchange="checkValue(event)">-->
+  
+  
+  <!--<input type = "button" id="back"value = "DC" onclick = "form1.answer.value += '' ">-->
+<br>
+  <!-- Display the Cancel button and erase all data entered by the user. -->
+  <button onclick="displayValue(this)" class="er" >%</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >(</button>&nbsp;
+  <button onclick="displayValue(this)" class="er" >)</button>&nbsp;
+  <button onclick="deleteCharacter()"class="er">DC</button>&nbsp;<br>
+</div><br><br><br><br>
+  <input type = "button" value = "Clear All" onclick = "form1.answer.value = ' ' " id= "clear" >
+  <br> 
+</form>
+
+</div>
+<script>
+  //code for display the values in textbox
+  function displayValue(element) {
+        document.getElementById("calc").value += element.innerHTML;
+        event.preventDefault();
+  }
+  //code for performing operations
+  function evaluateExpression() {
+        document.getElementById("calc").value = eval(document.getElementById("calc").value);
+        event.preventDefault();
+      }
+      //code for enter button
+var input = document.getElementById("calc");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("myBtn").click();
+  }
+});
+
+      //code for check condition
+      function checkCondition() {
+        var inputValue = document.getElementById("calc").value;
+        var pattern = /^[0-9\+\-\*\/\(\)\.\%]+$/;
+        if (!pattern.test(inputValue)) {
+          document.getElementById("calc").style.borderColor = "red";
+          document.getElementById("message").innerHTML = "Enter numbers Only";
+         
+        } else {
+          document.getElementById("calc").style.borderColor = "";
+          document.getElementById("message").innerHTML = "";
+          
+        }
+      }
+  //code for delete button
+      function deleteCharacter() {
+        document.getElementById("calc").value = document.getElementById("calc").value.slice(0, -1);
+      var message = document.getElementById("message");
+      var inputValue = document.getElementById("calc").value;
+        var pattern = /^[0-9\+\-\*\/\(\)\.\%]+$/;
+        // if(inputValue.value === ""){
+
+        // }
+        // console.log(!pattern.test(inputValue));
+        // console.log(inputValue.value);
+        if (!pattern.test(inputValue)) {
+          if(inputValue==""){
+            console.log("Dont Show Error Empty String");
+          console.log(inputValue);
+            document.getElementById("calc").style.borderColor = "";
+          document.getElementById("message").innerHTML = "";
+          }else{
+            console.log("Show Error");
+          console.log(inputValue);
+          document.getElementById("calc").style.borderColor = "red";
+          document.getElementById("message").innerHTML = "Enter numbers Only";
+          }
+        }
+        else {
+          document.getElementById("calc").style.borderColor = "";
+          document.getElementById("message").innerHTML = "";
+          
+        }
+        event.preventDefault();
+      }
+    
+      //code for remove alert
+let textBox = document.getElementById("calc");
+let message = document.getElementById("message");
+
+textBox.addEventListener("input", function() {
+  if (textBox.value === "") {
+    message.style.display = "none";
+    document.getElementById("calc").style.borderColor = "";
+  } else {
+    message.style.display = "block";
+  }
+});
+
+
+</script>
+</body>
+</html>
